@@ -3,6 +3,7 @@ title: "Welcome to Iqra Society Blog"
 description: "An introduction to our blog and what we aim to share with our readers."
 pubDate: 2025-12-07
 author: "Iqra Society"
+image: "/images/blog/welcome.svg"
 tags: ["welcome", "introduction", "islamic-knowledge"]
 lang: "en"
 ---

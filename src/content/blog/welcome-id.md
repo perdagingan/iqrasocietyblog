@@ -3,6 +3,7 @@ title: "Selamat Datang di Blog Iqra Society"
 description: "Pengenalan tentang blog kami dan apa yang kami tuju untuk dibagikan dengan pembaca kami"
 pubDate: 2025-12-07
 author: "Iqra Society"
+image: "/images/blog/welcome-id.svg"
 tags: ["selamat-datang", "pengenalan", "pengetahuan-islam"]
 lang: "id"
 ---
