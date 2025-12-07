@@ -1,3 +1,4 @@
+// @ts-ignore - wpapi doesn't have types
 import WPAPI from 'wpapi';
 
 /**
