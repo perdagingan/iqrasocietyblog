@@ -25,7 +25,11 @@ export class WordPressClient {
   private apiEndpoint: string;
 
   constructor(siteUrl?: string) {
-    this.baseUrl = siteUrl || import.meta.env.WORDPRESS_URL || 'https://example.com';
+    const wpUrl = siteUrl || import.meta.env.WORDPRESS_URL;
+    if (!wpUrl) {
+      throw new Error('WordPress URL is required. Set WORDPRESS_URL environment variable or pass siteUrl to constructor.');
+    }
+    this.baseUrl = wpUrl;
     this.apiEndpoint = `${this.baseUrl}/wp-json/wp/v2`;
   }
 
@@ -105,5 +109,9 @@ export class WordPressClient {
   }
 }
 
-// Export a singleton instance
-export const wpClient = new WordPressClient();
+// Export a function to create a client instance when WordPress URL is available
+export const createWordPressClient = (siteUrl?: string) => new WordPressClient(siteUrl);
+
+// Note: Initialize wpClient only when you have a valid WordPress URL
+// Example: const wpClient = createWordPressClient(import.meta.env.WORDPRESS_URL);
+

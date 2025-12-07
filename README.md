@@ -114,7 +114,10 @@ WORDPRESS_URL=https://your-wordpress-site.com
 
 2. Use the WordPress client in your pages:
 ```typescript
-import { wpClient } from '../lib/wordpress';
+import { createWordPressClient } from '../lib/wordpress';
+
+// Initialize the client with your WordPress URL
+const wpClient = createWordPressClient(import.meta.env.WORDPRESS_URL);
 
 const posts = await wpClient.getPosts(10, 1);
 const post = await wpClient.getPostBySlug('my-post-slug');
