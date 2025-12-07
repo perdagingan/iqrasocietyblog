@@ -116,10 +116,13 @@ WORDPRESS_URL=https://your-wordpress-site.com
 ```typescript
 import { wpClient } from '../lib/wordpress';
 
-const posts = await wpClient.getPosts();
+const posts = await wpClient.getPosts(10, 1);
+const post = await wpClient.getPostBySlug('my-post-slug');
 ```
 
-3. Available methods:
+The WordPress integration uses axios and the WordPress REST API directly for better security and reliability.
+
+Available methods:
    - `getPosts(perPage, page)` - Fetch all posts
    - `getPostBySlug(slug)` - Fetch single post
    - `getPostsByCategory(categoryId)` - Fetch posts by category

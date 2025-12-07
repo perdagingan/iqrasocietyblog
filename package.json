@@ -24,8 +24,7 @@
     "@astrojs/sitemap": "^3.6.0",
     "astro": "^5.16.4",
     "astro-i18n-aut": "^0.7.3",
-    "axios": "^1.13.2",
-    "wpapi": "^1.2.2"
+    "axios": "^1.13.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",

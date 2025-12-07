@@ -1,10 +1,9 @@
-// @ts-ignore - wpapi doesn't have types
-import WPAPI from 'wpapi';
+import axios from 'axios';
 
 /**
  * WordPress CMS Integration
  * 
- * This module provides integration with WordPress REST API
+ * This module provides integration with WordPress REST API using axios
  * Configure your WordPress site URL in environment variables
  */
 
@@ -22,11 +21,12 @@ export interface WordPressPost {
 }
 
 export class WordPressClient {
-  private wp: any;
+  private baseUrl: string;
+  private apiEndpoint: string;
 
   constructor(siteUrl?: string) {
-    const wpUrl = siteUrl || import.meta.env.WORDPRESS_URL || 'https://example.com';
-    this.wp = new WPAPI({ endpoint: `${wpUrl}/wp-json` });
+    this.baseUrl = siteUrl || import.meta.env.WORDPRESS_URL || 'https://example.com';
+    this.apiEndpoint = `${this.baseUrl}/wp-json/wp/v2`;
   }
 
   /**
@@ -34,11 +34,14 @@ export class WordPressClient {
    */
   async getPosts(perPage: number = 10, page: number = 1): Promise<WordPressPost[]> {
     try {
-      const posts = await this.wp.posts()
-        .perPage(perPage)
-        .page(page)
-        .get();
-      return posts;
+      const response = await axios.get(`${this.apiEndpoint}/posts`, {
+        params: {
+          per_page: perPage,
+          page: page,
+          _embed: true
+        }
+      });
+      return response.data;
     } catch (error) {
       console.error('Error fetching WordPress posts:', error);
       return [];
@@ -50,8 +53,13 @@ export class WordPressClient {
    */
   async getPostBySlug(slug: string): Promise<WordPressPost | null> {
     try {
-      const posts = await this.wp.posts().slug(slug).get();
-      return posts.length > 0 ? posts[0] : null;
+      const response = await axios.get(`${this.apiEndpoint}/posts`, {
+        params: {
+          slug: slug,
+          _embed: true
+        }
+      });
+      return response.data.length > 0 ? response.data[0] : null;
     } catch (error) {
       console.error(`Error fetching WordPress post ${slug}:`, error);
       return null;
@@ -63,11 +71,14 @@ export class WordPressClient {
    */
   async getPostsByCategory(categoryId: number, perPage: number = 10): Promise<WordPressPost[]> {
     try {
-      const posts = await this.wp.posts()
-        .categories(categoryId)
-        .perPage(perPage)
-        .get();
-      return posts;
+      const response = await axios.get(`${this.apiEndpoint}/posts`, {
+        params: {
+          categories: categoryId,
+          per_page: perPage,
+          _embed: true
+        }
+      });
+      return response.data;
     } catch (error) {
       console.error('Error fetching WordPress posts by category:', error);
       return [];
@@ -79,11 +90,14 @@ export class WordPressClient {
    */
   async searchPosts(query: string, perPage: number = 10): Promise<WordPressPost[]> {
     try {
-      const posts = await this.wp.posts()
-        .search(query)
-        .perPage(perPage)
-        .get();
-      return posts;
+      const response = await axios.get(`${this.apiEndpoint}/posts`, {
+        params: {
+          search: query,
+          per_page: perPage,
+          _embed: true
+        }
+      });
+      return response.data;
     } catch (error) {
       console.error('Error searching WordPress posts:', error);
       return [];
