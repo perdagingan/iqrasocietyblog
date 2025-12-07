@@ -1,0 +1,113 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  currentLang?: string;
+}
+
+const { currentLang = 'en' } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="header-container">
+    <div class="logo-section">
+      <a href="/" class="site-logo">
+        <h1>Iqra Society</h1>
+      </a>
+    </div>
+    
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <LanguageSwitcher currentLang={currentLang} />
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--color-background);
+    border-bottom: 2px solid var(--color-primary);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .logo-section {
+    flex-shrink: 0;
+  }
+
+  .site-logo h1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  .site-logo:hover h1 {
+    color: var(--color-accent);
+  }
+
+  .main-nav {
+    flex: 1;
+  }
+
+  .nav-list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    justify-content: center;
+  }
+
+  .nav-list a {
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .nav-list a:hover {
+    background-color: var(--color-secondary);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+    }
+  }
+</style>

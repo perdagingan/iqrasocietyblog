@@ -1,0 +1,71 @@
+---
+interface Props {
+  currentLang?: string;
+}
+
+const { currentLang = 'en' } = Astro.props;
+
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'ar', name: 'العربية' },
+  { code: 'id', name: 'Indonesia' },
+];
+---
+
+<div class="language-switcher">
+  <select id="language-select" class="language-select" aria-label="Select language">
+    {languages.map((lang) => (
+      <option value={lang.code} selected={currentLang === lang.code}>
+        {lang.name}
+      </option>
+    ))}
+  </select>
+</div>
+
+<style>
+  .language-switcher {
+    position: relative;
+  }
+
+  .language-select {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 2px solid var(--color-primary);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .language-select:hover {
+    background-color: var(--color-secondary);
+  }
+
+  .language-select:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const languageSelect = document.getElementById('language-select') as HTMLSelectElement;
+    
+    if (languageSelect) {
+      languageSelect.addEventListener('change', (e) => {
+        const target = e.target as HTMLSelectElement;
+        const newLang = target.value;
+        const currentPath = window.location.pathname;
+        
+        // Remove language prefix if exists
+        const pathWithoutLang = currentPath.replace(/^\/(en|ar|id)/, '');
+        
+        // Construct new URL with selected language
+        const newPath = newLang === 'en' ? pathWithoutLang || '/' : `/${newLang}${pathWithoutLang || '/'}`;
+        
+        window.location.href = newPath;
+      });
+    }
+  });
+</script>

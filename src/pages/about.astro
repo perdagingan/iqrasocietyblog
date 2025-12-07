@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About - Iqra Society" description="Learn about Iqra Society and our mission" lang="en">
+  <div class="about-container">
+    <h1>About Iqra Society</h1>
+    
+    <section class="about-section">
+      <h2>Our Mission</h2>
+      <p>
+        Iqra Society is dedicated to promoting Islamic knowledge and education through accessible,
+        high-quality content. We believe that knowledge is the key to understanding and practicing
+        Islam in the modern world.
+      </p>
+    </section>
+
+    <section class="about-section">
+      <h2>What "Iqra" Means</h2>
+      <p>
+        "Iqra" is the first word revealed in the Quran, meaning "read" or "recite." This powerful
+        command emphasizes the importance of seeking knowledge, which is at the heart of our mission.
+      </p>
+    </section>
+
+    <section class="about-section">
+      <h2>Our Approach</h2>
+      <ul>
+        <li><strong>Authentic Sources:</strong> All content is based on authentic Islamic sources</li>
+        <li><strong>Accessible Language:</strong> We present complex topics in clear, understandable ways</li>
+        <li><strong>Diverse Perspectives:</strong> We respect different schools of thought within Islam</li>
+        <li><strong>Contemporary Relevance:</strong> We address modern challenges through an Islamic lens</li>
+      </ul>
+    </section>
+
+    <section class="about-section">
+      <h2>Multilingual Support</h2>
+      <p>
+        We provide content in multiple languages including English, Arabic, and Indonesian to reach
+        a wider audience and make Islamic knowledge accessible to Muslims around the world.
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .about-section {
+    margin-bottom: 3rem;
+  }
+
+  .about-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-section p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .about-section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .about-section li {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .about-section li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .about-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .about-section p,
+    .about-section li {
+      font-size: 1rem;
+    }
+  }
+</style>
